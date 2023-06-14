@@ -40,6 +40,17 @@ function App() {
   };
 
   const onChange = (e) => {
+    const uploadedFile = e.target.files[0];
+    validateImageUpload(uploadedFile);
+    function validateImageUpload(file) {
+      const allowedMimeTypes = ['image/jpeg', 'image/png', 'image/gif'];
+      if (allowedMimeTypes.includes(file.type)) {
+        console.log('Image upload is valid.');
+      } else {
+        return alert("Invalid image upload. Please choose a JPEG, PNG, or GIF file.");
+      }
+    }
+    
     e.preventDefault();
     let files;
     if (e.dataTransfer) {
@@ -51,7 +62,8 @@ function App() {
     reader.onload = () => {
       setImage(reader.result);
     };
-    reader.readAsDataURL(files[0]);
+    reader.readAsDataURL(files[0]); 
+  
   };
 
   return (
@@ -64,13 +76,12 @@ function App() {
         </h6>
         <h2 class="mt-3 mb-4">Resize, Crop & Compress your images.</h2>
         <p class="mb-1">
-          Resize your images for free, either JPEG or PNG images. Serve
-          high-quality images in the right size to reduce page weight and load
-          time.
+          Resize your images, either JPEG or PNG images. Serve high-quality
+          images in the right size to reduce page weight and load time.
         </p>
         <p>
           Upload or drag n' drop the files you want to resize, crop and
-          compress. Pick as many files as you want or go one by one.
+          compress.
         </p>
 
         <div class="row justify-content-center mt-4">
@@ -83,6 +94,7 @@ function App() {
                     <input
                       className="form-control"
                       type="file"
+                      accept="image/png,image/jpeg,image/jpg"
                       onChange={onChange}
                     />
                   </div>
