@@ -23,7 +23,9 @@ function App() {
   const downloadImage = async () => {
     var canvas = document.getElementById("croppedImage");
     var dataUrl = canvas.src;
-    var fileName = "image.png";
+    let fileNames = document.getElementById('inputIf').value;
+    const extension = fileNames.substring(fileNames.lastIndexOf('.') + 1, fileNames.length)
+    var fileName = "github-codeincrypt-"+Math.floor(Date.now() / 1000)+"."+extension;
     var byteString = atob(dataUrl.split(",")[1]);
     var mimeString = dataUrl.split(",")[0].split(":")[1].split(";")[0];
     var ab = new ArrayBuffer(byteString.length);
@@ -37,6 +39,8 @@ function App() {
     link.download = fileName;
     link.click();
     window.URL.revokeObjectURL(link.href);
+
+    setImage("")
   };
 
   const onChange = (e) => {
@@ -94,6 +98,7 @@ function App() {
                     <input
                       className="form-control"
                       type="file"
+                      id="inputIf"
                       accept="image/png,image/jpeg,image/jpg"
                       onChange={onChange}
                     />
@@ -153,7 +158,7 @@ function App() {
                       <button
                         style={{ cursor: "not-allowed" }}
                         type="button"
-                        className="btn btn-primary btn-lg mt-3"
+                        className="btn btn-primary btn-lg"
                         disabled
                       >
                         Download Image
