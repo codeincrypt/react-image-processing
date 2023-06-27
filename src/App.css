@@ -59,3 +59,15 @@ p {
     transform: rotate(360deg);
   }
 }
+
+.btn-brand {
+  color: #fff !important;
+  background-color: #434857 !important;
+  border-color: #157da4 !important;
+}
+
+.btn-active {
+  color: #fff;
+  background-color: #157da4 !important;
+  border-color: #157da4 !important;
+}
